@@ -13,8 +13,14 @@ if not settings.configured:
             }
         },
         INSTALLED_APPS=(
+            'rapidsms',
+            'rapidsms.contrib.handlers',
+            'appointments',
+            'healthcare',
+            'healthcare.backends.djhealth',
             'natalcare',
         ),
+        HEALTHCARE_STORAGE_BACKEND='healthcare.backends.djhealth.DjangoStorage',
         SITE_ID=1,
         SECRET_KEY='this-is-just-for-tests-so-not-that-secret',
     )
@@ -26,7 +32,8 @@ from django.test.utils import get_runner
 def runtests():
     TestRunner = get_runner(settings)
     test_runner = TestRunner(verbosity=1, interactive=True, failfast=False)
-    failures = test_runner.run_tests(['natalcare', ])
+    args = sys.argv[1:] or ['natalcare', ]
+    failures = test_runner.run_tests(args)
     sys.exit(failures)
 
 
