@@ -34,6 +34,10 @@ setup(
         'Operating System :: OS Independent',
     ],
     long_description=read_file('README.rst'),
+    install_requires=(
+        'rapidsms-healthcare>=0.1',
+        'rapidsms-appointments>=0.1',
+    ),
     test_suite="runtests.runtests",
     zip_safe=False,
 )
